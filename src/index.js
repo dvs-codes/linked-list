@@ -61,10 +61,55 @@ class LinkedList {
 
   pop() {
     let currentNode = this.list
-    while(currentNode.nextNode!==null) {
+    while(currentNode.nextNode.nextNode!==null) {
       currentNode = currentNode.nextNode
     }
-    currentNode = null
+    currentNode.nextNode = null 
+  }
+
+  contains(value) {
+    let currentNode=this.list
+    if (currentNode.value===value) {
+      return true
+    } else {
+      while(currentNode.nextNode!==null) {
+        if(currentNode.nextNode.value===value) {
+          return true
+        } 
+        currentNode = currentNode.nextNode
+      } return false
+    }
+  }
+
+  find(value) {
+    let currentNode=this.list
+    let index = 0
+    if (currentNode.value===value) {
+      return index
+    } else {
+      index = 1
+      while(currentNode.nextNode!==null) {
+        if(currentNode.nextNode.value===value) {
+          return index
+        } 
+        index++
+        currentNode = currentNode.nextNode
+      } return null
+    }
+  }
+
+  get toString() {
+    let currentNode = this.list
+    let stringedList = ''
+    if (this.list ===null) {
+      return `(null)`
+    } else {
+      while(currentNode.nextNode!==null) {
+        stringedList += `(${currentNode.value})->`
+        currentNode = currentNode.nextNode
+      }
+      return stringedList += `(${currentNode.value})-> null`
+    }
   }
 }
 
@@ -76,13 +121,15 @@ class Node {
 }
 
 let newList = new LinkedList()
+
 newList.append('val1')
 newList.append('val2')
 newList.append('val3')
 newList.prepend('head')
 newList.append('val4')
-newList.append('val5')
-newList.append('val6')
+newList.append('tail')
+newList.append('tails2')
+newList.prepend('head2')
 
-newList.pop()
 console.log(newList)
+console.log(newList.toString)
